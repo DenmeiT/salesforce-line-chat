@@ -1,4 +1,4 @@
-import { Lightniimport { LightningElement, api, wire } from 'lwc';
+import { LightningElement, api, wire } from 'lwc';
 import getMessages from '@salesforce/apex/LineChatController.getMessages';
 import getConversations from '@salesforce/apex/LineChatController.getConversations';
 import sendReply from '@salesforce/apex/LineChatController.sendReply';
