@@ -60,6 +60,7 @@ export default class LineChat extends LightningElement {
             const newMessages = result.data.map((msg) => {
                 return {
                     ...msg,
+                    formattedTime: new Date(msg.SentAt__c).toLocaleString('ja-JP'),
                     cssClass:
                         msg.Direction__c === 'Outbound'
                             ? 'message-row outbound'
