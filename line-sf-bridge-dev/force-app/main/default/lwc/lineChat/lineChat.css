@@ -113,3 +113,8 @@
     color: #666;
     margin-bottom: 8px;
 }
+
+.conversation-item.selected {
+    background: #e8f4ff;
+    border-left: 4px solid #1b96ff;
+}

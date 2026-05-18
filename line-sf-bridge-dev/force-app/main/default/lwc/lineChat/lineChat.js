@@ -30,10 +30,19 @@ export default class LineChat extends LightningElement {
         this.wiredConversationResult = result;
 
         if (result.data) {
-            this.conversations = result.data;
+            this.conversations = result.data.map((conv) => {
+                return {
+                    ...conv,
+                    cssClass:
+                        conv.Id === this.selectedConversationId
+                            ? 'conversation-item selected'
+                            : 'conversation-item'
+                };
+            });
+    });
 
-            if (!this.selectedConversationId && result.data.length > 0) {
-                this.selectedConversationId = result.data[0].Id;
+        if (!this.selectedConversationId && result.data.length > 0) {
+            this.selectedConversationId = result.data[0].Id;
             }
         } else if (result.error) {
             console.error(result.error);
