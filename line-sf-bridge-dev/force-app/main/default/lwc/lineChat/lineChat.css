@@ -1,0 +1,47 @@
+.message-area {
+    max-height: 420px;
+    overflow-y: auto;
+    background: #f7f7f7;
+}
+
+.message-row {
+    display: flex;
+    margin-bottom: 8px;
+}
+
+.message-row.inbound {
+    justify-content: flex-start;
+}
+
+.message-row.outbound {
+    justify-content: flex-end;
+}
+
+.message-bubble {
+    max-width: 75%;
+    padding: 8px 12px;
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+
+.message-row.outbound .message-bubble {
+    background: #d8f5d1;
+}
+
+.message-text {
+    white-space: pre-wrap;
+    font-size: 14px;
+}
+
+.message-time {
+    margin-top: 4px;
+    font-size: 10px;
+    color: #777;
+    text-align: right;
+}
+
+.send-mode-help {
+    font-size: 11px;
+    color: #666;
+}

@@ -1,0 +1,58 @@
+<template>
+    <lightning-card title="LINEチャット">
+
+        <div class="slds-p-around_medium message-area">
+
+            <template if:true={messages}>
+                <template for:each={messages} for:item="msg">
+                    <div key={msg.Id} class={msg.cssClass}>
+                        <div class="message-bubble">
+                            <div class="message-text">
+                                {msg.MessageText__c}
+                            </div>
+                            <div class="message-time">
+                                {msg.SentAt__c}
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </template>
+
+        </div>
+
+        <div class="slds-p-around_medium">
+
+            <lightning-input
+                type="toggle"
+                label="Enterで送信"
+                checked={sendOnEnter}
+                onchange={handleSendModeChange}
+            >
+            </lightning-input>
+
+            <div class="send-mode-help slds-m-bottom_small">
+                {sendModeHelpText}
+            </div>
+
+            <lightning-textarea
+                label="返信"
+                value={replyText}
+                onchange={handleChange}
+                onkeydown={handleKeyDown}
+            >
+            </lightning-textarea>
+
+            <div class="slds-m-top_small">
+                <lightning-button
+                    variant="brand"
+                    label="送信"
+                    onclick={sendMessage}
+                    disabled={isSending}
+                >
+                </lightning-button>
+            </div>
+
+        </div>
+
+    </lightning-card>
+</template>
