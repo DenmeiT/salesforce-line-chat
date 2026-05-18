@@ -1,4 +1,4 @@
-import { LightningElement, api, wire } from 'lwc';
+import { Lightniimport { LightningElement, api, wire } from 'lwc';
 import getMessages from '@salesforce/apex/LineChatController.getMessages';
 import getConversations from '@salesforce/apex/LineChatController.getConversations';
 import sendReply from '@salesforce/apex/LineChatController.sendReply';
@@ -30,20 +30,34 @@ export default class LineChat extends LightningElement {
         this.wiredConversationResult = result;
 
         if (result.data) {
+
             this.conversations = result.data.map((conv) => {
                 return {
                     ...conv,
+
+                    formattedLastMessageAt: conv.LastMessageAt__c
+                        ? new Date(conv.LastMessageAt__c).toLocaleString(
+                            'ja-JP',
+                            {
+                                month: 'numeric',
+                                day: 'numeric',
+                                hour: '2-digit',
+                                minute: '2-digit'
+                            }
+                        )
+                        : '',
+
                     cssClass:
                         conv.Id === this.selectedConversationId
                             ? 'conversation-item selected'
                             : 'conversation-item'
                 };
             });
-    });
 
-        if (!this.selectedConversationId && result.data.length > 0) {
-            this.selectedConversationId = result.data[0].Id;
+            if (!this.selectedConversationId && result.data.length > 0) {
+                this.selectedConversationId = result.data[0].Id;
             }
+
         } else if (result.error) {
             console.error(result.error);
         }
@@ -57,10 +71,23 @@ export default class LineChat extends LightningElement {
         this.wiredMessagesResult = result;
 
         if (result.data) {
+
             const newMessages = result.data.map((msg) => {
                 return {
                     ...msg,
-                    formattedTime: new Date(msg.formattedTime).toLocaleString('ja-JP'),
+
+                    formattedTime: msg.SentAt__c
+                        ? new Date(msg.SentAt__c).toLocaleString(
+                            'ja-JP',
+                            {
+                                month: 'numeric',
+                                day: 'numeric',
+                                hour: '2-digit',
+                                minute: '2-digit'
+                            }
+                        )
+                        : '',
+
                     cssClass:
                         msg.Direction__c === 'Outbound'
                             ? 'message-row outbound'
@@ -146,6 +173,7 @@ export default class LineChat extends LightningElement {
         this.isSending = true;
 
         try {
+
             await sendReply({
                 conversationId: this.selectedConversationId,
                 text
@@ -168,6 +196,7 @@ export default class LineChat extends LightningElement {
 
     scrollToBottom() {
         window.setTimeout(() => {
+
             const messageArea =
                 this.template.querySelector('.message-area');
 
@@ -175,6 +204,7 @@ export default class LineChat extends LightningElement {
                 messageArea.scrollTop =
                     messageArea.scrollHeight;
             }
+
         }, 100);
     }
 }
