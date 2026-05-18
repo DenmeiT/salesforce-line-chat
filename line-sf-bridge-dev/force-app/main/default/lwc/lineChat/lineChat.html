@@ -3,23 +3,19 @@
 
         <div class="chat-layout">
 
-            <!-- 左：会話一覧 -->
             <div class="conversation-list">
-
                 <div class="conversation-header">
                     会話一覧
                 </div>
 
                 <template if:true={conversations}>
                     <template for:each={conversations} for:item="conv">
-
                         <div
                             key={conv.Id}
                             class={conv.cssClass}
                             data-id={conv.Id}
                             onclick={handleConversationClick}
                         >
-
                             <div class="conversation-name">
                                 {conv.Contact__r.Name}
                             </div>
@@ -27,29 +23,21 @@
                             <div class="conversation-time">
                                 {conv.formattedLastMessageAt}
                             </div>
-
                         </div>
-
                     </template>
                 </template>
-
             </div>
 
-            <!-- 右：チャット -->
             <div class="chat-panel">
 
                 <div class="message-area">
-
                     <template if:true={messages}>
                         <template for:each={messages} for:item="msg">
-
                             <div
                                 key={msg.Id}
                                 class={msg.cssClass}
                             >
-
                                 <div class="message-bubble">
-
                                     <div class="message-text">
                                         {msg.MessageText__c}
                                     </div>
@@ -57,18 +45,13 @@
                                     <div class="message-time">
                                         {msg.formattedTime}
                                     </div>
-
                                 </div>
-
                             </div>
-
                         </template>
                     </template>
-
                 </div>
 
                 <div class="reply-area">
-
                     <lightning-input
                         type="toggle"
                         label="Enterで送信"
@@ -90,7 +73,6 @@
                     </lightning-textarea>
 
                     <div class="send-button-area">
-
                         <lightning-button
                             variant="brand"
                             label="送信"
@@ -98,9 +80,7 @@
                             disabled={isSending}
                         >
                         </lightning-button>
-
                     </div>
-
                 </div>
 
             </div>
