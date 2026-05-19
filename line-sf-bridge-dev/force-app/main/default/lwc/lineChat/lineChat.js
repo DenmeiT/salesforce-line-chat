@@ -102,12 +102,7 @@ export default class LineChat extends LightningElement {
                     cssClass:
                         msg.Direction__c === 'Outbound'
                             ? 'message-row outbound'
-                            : 'message-row inbound'
-
-                    pictureUrl:
-                        conv.Contact__r && conv.Contact__r.LINEPictureUrl__c
-                            ? conv.Contact__r.LINEPictureUrl__c
-                            : '',        
+                            : 'message-row inbound'    
                 };
             });
 
