@@ -1,0 +1,122 @@
+<template>
+    <lightning-card title="LINEチャット">
+
+        <div class="chat-layout">
+
+            <div class="conversation-list">
+                <div class="conversation-header">
+                    会話一覧
+                </div>
+
+                <template if:true={conversations}>
+                    <template for:each={conversations} for:item="conv">
+                        <div
+                            key={conv.Id}
+                            class={conv.cssClass}
+                            data-id={conv.Id}
+                            onclick={handleConversationClick}
+                        >
+                            <div class="conversation-row">
+                                <div class="conversation-avatar">
+                                    <template if:true={conv.pictureUrl}>
+                                        <img src={conv.pictureUrl} alt="LINE profile" />
+                                    </template>
+                                    <template if:false={conv.pictureUrl}>
+                                        <div class="conversation-avatar-placeholder">
+                                            L
+                                        </div>
+                                    </template>
+                                </div>
+
+                                <div class="conversation-content">
+                                    <div class="conversation-name">
+                                        {conv.displayName}
+                                    </div>
+<div style="font-size:10px;color:red;">
+    {conv.pictureUrl}
+</div>
+                                    <div class="conversation-preview">
+                                        {conv.latestMessagePreview}
+                                    </div>
+
+                                    <div class="conversation-time">
+                                        {conv.formattedLastMessageAt}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </template>
+            </div>
+
+            <div class="chat-panel">
+
+                <div class="message-area">
+    </div>
+</div>
+                        </div>
+                    </template>
+                </template>
+            </div>
+
+            <div class="chat-panel">
+
+                <div class="message-area">
+                    <template if:true={messages}>
+                        <template for:each={messages} for:item="msg">
+                            <div
+                                key={msg.Id}
+                                class={msg.cssClass}
+                            >
+                                <div class="message-bubble">
+                                    <div class="message-text">
+                                        {msg.MessageText__c}
+                                    </div>
+
+                                    <div class="message-time">
+                                        {msg.formattedTime}
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </template>
+                </div>
+
+                <div class="reply-area">
+                    <lightning-input
+                        type="toggle"
+                        label="Enterで送信"
+                        checked={sendOnEnter}
+                        onchange={handleSendModeChange}
+                    >
+                    </lightning-input>
+
+                    <div class="send-mode-help">
+                        {sendModeHelpText}
+                    </div>
+
+                    <lightning-textarea
+                        label="返信"
+                        value={replyText}
+                        onchange={handleChange}
+                        onkeydown={handleKeyDown}
+                    >
+                    </lightning-textarea>
+
+                    <div class="send-button-area">
+                        <lightning-button
+                            variant="brand"
+                            label="送信"
+                            onclick={sendMessage}
+                            disabled={isSending}
+                        >
+                        </lightning-button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </lightning-card>
+</template>

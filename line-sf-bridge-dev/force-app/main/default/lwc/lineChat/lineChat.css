@@ -1,0 +1,167 @@
+.chat-layout {
+    display: flex;
+    height: 700px;
+}
+
+/* 左カラム */
+
+.conversation-list {
+    width: 320px;
+    border-right: 1px solid #ddd;
+    overflow-y: auto;
+    background: #fafafa;
+}
+
+.conversation-header {
+    padding: 12px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    background: white;
+}
+
+.conversation-item {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    background: white;
+}
+
+.conversation-item:hover {
+    background: #f4f6f9;
+}
+
+.conversation-name {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.conversation-time {
+    font-size: 11px;
+    color: #888;
+}
+
+/* 右カラム */
+
+.chat-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #f5f5f5;
+}
+
+.message-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+}
+
+/* メッセージ */
+
+.message-row {
+    display: flex;
+    margin-bottom: 12px;
+}
+
+.message-row.inbound {
+    justify-content: flex-start;
+}
+
+.message-row.outbound {
+    justify-content: flex-end;
+}
+
+.message-bubble {
+    max-width: 70%;
+    padding: 10px 14px;
+    border-radius: 14px;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.inbound .message-bubble {
+    background: white;
+    border: 1px solid #ddd;
+}
+
+.outbound .message-bubble {
+    background: #95ec69;
+}
+
+.message-text {
+    white-space: pre-wrap;
+}
+
+.message-time {
+    font-size: 10px;
+    color: #666;
+    margin-top: 4px;
+    white-space: nowrap;
+}
+
+/* 返信欄 */
+
+.reply-area {
+    padding: 12px;
+    border-top: 1px solid #ddd;
+    background: white;
+}
+
+.send-button-area {
+    margin-top: 8px;
+}
+
+.send-mode-help {
+    font-size: 11px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.conversation-item.selected {
+    background: #e8f4ff;
+    border-left: 4px solid #1b96ff;
+}
+
+.conversation-preview {
+    font-size: 12px;
+    color: #555;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.conversation-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.conversation-avatar {
+    width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
+}
+
+.conversation-avatar img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.conversation-avatar-placeholder {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #d8dde6;
+    color: #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.conversation-content {
+    min-width: 0;
+    flex: 1;
+}
