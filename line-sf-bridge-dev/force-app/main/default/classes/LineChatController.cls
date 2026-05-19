@@ -29,11 +29,25 @@ public with sharing class LineChatController {
                    Status__c,
                    LastMessageAt__c,
                    LastMessageText__c,
+                   IsWaitingReply__c,
+                   IsUnread__c,
                    CreatedDate
             FROM LINE_Conversation__c
             ORDER BY LastMessageAt__c DESC NULLS LAST, CreatedDate DESC
             LIMIT 100
         ];
+    }
+
+    @AuraEnabled
+    public static void markAsRead(Id conversationId) {
+        if (conversationId == null) {
+            return;
+        }
+
+        update new LINE_Conversation__c(
+            Id = conversationId,
+            IsUnread__c = false
+        );
     }
 
     @AuraEnabled
