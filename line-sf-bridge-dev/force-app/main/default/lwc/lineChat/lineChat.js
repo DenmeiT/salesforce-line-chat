@@ -35,6 +35,8 @@ export default class LineChat extends LightningElement {
                 return {
                     ...conv,
 
+                    latestMessagePreview: conv.LastMessageText__c || '',
+
                     formattedLastMessageAt: conv.LastMessageAt__c
                         ? new Date(conv.LastMessageAt__c).toLocaleString(
                             'ja-JP',
