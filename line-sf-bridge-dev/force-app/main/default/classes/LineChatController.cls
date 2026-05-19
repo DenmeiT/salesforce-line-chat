@@ -33,8 +33,13 @@ public with sharing class LineChatController {
                    IsUnread__c,
                    CreatedDate
             FROM LINE_Conversation__c
-            ORDER BY LastMessageAt__c DESC NULLS LAST, CreatedDate DESC
-            LIMIT 100
+            ORDER BY
+                IsWaitingReply__c DESC,
+                IsUnread__c DESC,
+                LastMessageAt__c DESC NULLS LAST,
+                CreatedDate DESC
+                
+                LIMIT 100
         ];
     }
 
