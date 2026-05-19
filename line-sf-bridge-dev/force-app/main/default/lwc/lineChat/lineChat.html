@@ -36,7 +36,9 @@
                                     <template if:true={conv.isWaitingReply}>
                                         <span class="unread-badge">未返信</span>
                                     </template>
-
+                                    <template if:true={conv.isUnread}>
+                                        <span class="unread-badge unread">未読</span>
+                                    </template>
                                     <div class="conversation-preview">
                                         {conv.latestMessagePreview}
                                     </div>

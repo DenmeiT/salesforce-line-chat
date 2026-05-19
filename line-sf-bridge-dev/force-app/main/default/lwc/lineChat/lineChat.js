@@ -35,7 +35,8 @@ export default class LineChat extends LightningElement {
             this.conversations = result.data.map((conv) => {
                 return {
                     ...conv,
-
+                    
+                    isUnread: conv.IsUnread__c === true,
                     isWaitingReply: conv.IsWaitingReply__c === true,
 
                     displayName:
