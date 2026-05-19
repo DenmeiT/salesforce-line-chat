@@ -165,3 +165,14 @@
     min-width: 0;
     flex: 1;
 }
+
+.unread-badge {
+    display: inline-block;
+    margin-top: 4px;
+    padding: 2px 6px;
+    border-radius: 999px;
+    background: #e60033;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+}

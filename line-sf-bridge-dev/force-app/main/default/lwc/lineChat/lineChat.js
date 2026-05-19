@@ -35,6 +35,8 @@ export default class LineChat extends LightningElement {
                 return {
                     ...conv,
 
+                    isWaitingReply: conv.IsWaitingReply__c === true,
+
                     displayName:
                         conv.Contact__r && conv.Contact__r.LINEDisplayName__c
                             ? conv.Contact__r.LINEDisplayName__c
