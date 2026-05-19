@@ -35,20 +35,22 @@ export default class LineChat extends LightningElement {
                 return {
                     ...conv,
 
-                    displayName: conv.Contact__r?.LINEDisplayName__c || conv.Contact__r?.Name || 'LINEユーザー',
-                    
+                    displayName:
+                        conv.Contact__r && conv.Contact__r.LINEDisplayName__c
+                            ? conv.Contact__r.LINEDisplayName__c
+                            : conv.Contact__r && conv.Contact__r.Name
+                                ? conv.Contact__r.Name
+                                : 'LINEユーザー',
+
                     latestMessagePreview: conv.LastMessageText__c || '',
 
                     formattedLastMessageAt: conv.LastMessageAt__c
-                        ? new Date(conv.LastMessageAt__c).toLocaleString(
-                            'ja-JP',
-                            {
-                                month: 'numeric',
-                                day: 'numeric',
-                                hour: '2-digit',
-                                minute: '2-digit'
-                            }
-                        )
+                        ? new Date(conv.LastMessageAt__c).toLocaleString('ja-JP', {
+                            month: 'numeric',
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        })
                         : '',
 
                     cssClass:
