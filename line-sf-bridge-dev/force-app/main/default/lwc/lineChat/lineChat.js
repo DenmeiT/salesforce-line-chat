@@ -41,7 +41,7 @@ export default class LineChat extends LightningElement {
                             : conv.Contact__r && conv.Contact__r.Name
                                 ? conv.Contact__r.Name
                                 : 'LINEユーザー',
-                                
+
                     pictureUrl:
                         conv.Contact__r && conv.Contact__r.LINEPictureUrl__c
                             ? conv.Contact__r.LINEPictureUrl__c
@@ -103,6 +103,11 @@ export default class LineChat extends LightningElement {
                         msg.Direction__c === 'Outbound'
                             ? 'message-row outbound'
                             : 'message-row inbound'
+
+                    pictureUrl:
+                        conv.Contact__r && conv.Contact__r.LINEPictureUrl__c
+                            ? conv.Contact__r.LINEPictureUrl__c
+                            : '',        
                 };
             });
 
