@@ -180,3 +180,9 @@
 .unread-badge.unread {
     background: #0176d3;
 }
+
+.conversation-search {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    background: white;
+}

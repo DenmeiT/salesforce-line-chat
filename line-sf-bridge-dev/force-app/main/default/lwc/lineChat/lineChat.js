@@ -12,6 +12,9 @@ export default class LineChat extends LightningElement {
     messages = [];
     conversations = [];
 
+    searchKeyword = '';
+    allConversations = []; 
+
     wiredMessagesResult;
     wiredConversationResult;
 
@@ -32,7 +35,7 @@ export default class LineChat extends LightningElement {
 
         if (result.data) {
 
-            this.conversations = result.data.map((conv) => {
+            this.allConversations = result.data.map((conv) => {
                 return {
                     ...conv,
 
@@ -68,6 +71,8 @@ export default class LineChat extends LightningElement {
                             : 'conversation-item'
                 };
             });
+
+            this.applyConversationFilter();
 
             if (!this.selectedConversationId && result.data.length > 0) {
                 this.selectedConversationId = result.data[0].Id;
@@ -247,4 +252,26 @@ export default class LineChat extends LightningElement {
 
         }, 100);
     }
+
+    handleSearchChange(event) {
+        this.searchKeyword = event.target.value || '';
+        this.applyConversationFilter();
+    }
+
+    applyConversationFilter() {
+        const keyword = (this.searchKeyword || '').toLowerCase();
+
+        if (!keyword) {
+            this.conversations = this.allConversations;
+            return;
+        }
+
+        this.conversations = this.allConversations.filter((conv) => {
+            const name = (conv.displayName || '').toLowerCase();
+            const message = (conv.latestMessagePreview || '').toLowerCase();
+
+            return name.includes(keyword) || message.includes(keyword);
+         });
+    }
+
 }
