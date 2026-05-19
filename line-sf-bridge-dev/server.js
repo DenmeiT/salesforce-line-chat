@@ -216,6 +216,8 @@ app.post("/webhook", async (req, res) => {
         record.Conversation__c = conversationId;
       }
 
+      console.log("record to Salesforce:", record);
+
       const result = await conn.sobject("LINE_Message__c").create(record);
       console.log("Salesforce inbound create result:", result);
     }
