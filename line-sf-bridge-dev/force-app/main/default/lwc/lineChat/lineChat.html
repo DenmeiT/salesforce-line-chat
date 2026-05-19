@@ -33,7 +33,9 @@
                                     <div class="conversation-name">
                                         {conv.displayName}
                                     </div>
-
+<div style="font-size:10px;color:red;">
+    未返信値：{conv.isWaitingReply}
+</div>
                                     <template if:true={conv.isWaitingReply}>
                                         <span class="unread-badge">未返信</span>
                                     </template>
