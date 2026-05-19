@@ -35,7 +35,7 @@ export default class LineChat extends LightningElement {
             this.conversations = result.data.map((conv) => {
                 return {
                     ...conv,
-                    
+
                     isUnread: conv.IsUnread__c === true,
                     isWaitingReply: conv.IsWaitingReply__c === true,
 
@@ -138,6 +138,18 @@ export default class LineChat extends LightningElement {
         if (this.refreshTimer) {
             clearInterval(this.refreshTimer);
         }
+    }
+
+    get unreadCount() {
+        return this.conversations.filter((conv) => conv.isUnread).length;
+    }
+
+    get cardTitle() {
+        if (this.unreadCount > 0) {
+            return `LINEチャット（未読 ${this.unreadCount}）`;
+        }
+
+        return 'LINEチャット';
     }
 
     get sendModeHelpText() {
