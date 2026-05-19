@@ -41,6 +41,11 @@ export default class LineChat extends LightningElement {
                             : conv.Contact__r && conv.Contact__r.Name
                                 ? conv.Contact__r.Name
                                 : 'LINEユーザー',
+                                
+                    pictureUrl:
+                        conv.Contact__r && conv.Contact__r.LINEPictureUrl__c
+                            ? conv.Contact__r.LINEPictureUrl__c
+                            : '',
 
                     latestMessagePreview: conv.LastMessageText__c || '',
 
