@@ -184,22 +184,29 @@ app.post("/webhook", async (req, res) => {
         await conn.sobject("LINE_Conversation__c").update({
           Id: conversationId,
           LastMessageAt__c: new Date(event.timestamp).toISOString(),
-          LastMessageText__c: message.text || "",
+          LastMessageText__c:
+            message.type === "text"
+                ? message.text
+                : `[${message.type}メッセージ]`,
 
-          IsUnread__c: true,
-          IsWaitingReply__c: true,
+            IsUnread__c: true,
+            IsWaitingReply__c: true,
         });
       }
 
       const record = {
         Direction__c: "Inbound",
-        MessageType__c: message.type || "unknown",
-        MessageText__c: message.text || "",
+        MessageText__c:
+            message.type === "text"
+              ? message.text
+              : `[${message.type}メッセージ]`,
+        MessageType__c: message.type,
         LineMessageId__c: message.id,
         LineUserId__c: lineUserId,
         SentAt__c: new Date(event.timestamp).toISOString(),
-        HasAttachment__c: message.type !== "text"
-      };
+        HasAttachment__c: message.type !== "text",
+        LineContentId__c: message.type !== "text" ? message.id : null
+     };
 
       if (contactId) {
         record.Contact__c = contactId;
