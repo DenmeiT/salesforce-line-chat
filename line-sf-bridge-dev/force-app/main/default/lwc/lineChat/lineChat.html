@@ -21,6 +21,7 @@
                                     <template if:true={conv.pictureUrl}>
                                         <img src={conv.pictureUrl} alt="LINE profile" />
                                     </template>
+
                                     <template if:false={conv.pictureUrl}>
                                         <div class="conversation-avatar-placeholder">
                                             L
@@ -36,7 +37,7 @@
                                     <template if:true={conv.isWaitingReply}>
                                         <span class="unread-badge">未返信</span>
                                     </template>
-                                    
+
                                     <div class="conversation-preview">
                                         {conv.latestMessagePreview}
                                     </div>
@@ -46,16 +47,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </template>
-                </template>
-            </div>
-
-            <div class="chat-panel">
-
-                <div class="message-area">
-    </div>
-</div>
                         </div>
                     </template>
                 </template>
