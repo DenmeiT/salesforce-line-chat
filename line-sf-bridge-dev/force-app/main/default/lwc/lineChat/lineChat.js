@@ -3,6 +3,7 @@ import getMessages from '@salesforce/apex/LineChatController.getMessages';
 import getConversations from '@salesforce/apex/LineChatController.getConversations';
 import sendReply from '@salesforce/apex/LineChatController.sendReply';
 import { refreshApex } from '@salesforce/apex';
+import markAsRead from '@salesforce/apex/LineChatController.markAsRead';
 
 export default class LineChat extends LightningElement {
     @api recordId;
@@ -146,11 +147,24 @@ export default class LineChat extends LightningElement {
         return 'Enterで改行 / Shift+Enterで送信';
     }
 
-    handleConversationClick(event) {
-        this.selectedConversationId =
+    async handleConversationClick(event) {
+        const conversationId =
             event.currentTarget.dataset.id;
 
+        this.selectedConversationId = conversationId;
+
         this.lastMessageCount = 0;
+
+        try {
+            await markAsRead({
+                conversationId: conversationId
+            });
+
+            this.refreshKey = String(Date.now());
+
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     handleSendModeChange(event) {
